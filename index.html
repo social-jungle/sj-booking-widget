@@ -51,21 +51,25 @@ body{font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--t1);
 .cnb{background:none;border:1px solid var(--bd2);border-radius:var(--rs);color:var(--t2);width:30px;height:30px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
 .cnb:hover:not(:disabled){border-color:var(--or);color:var(--or)}
 .cnb:disabled{opacity:0.28;cursor:not-allowed}
-.cal-wrap{max-width:800px;margin:0 auto}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0}
+.cal-wrap{max-width:680px;margin:0 auto}
+.cal-grid-wrap{position:relative}
+.cal-cols{position:absolute;top:0;left:0;width:100%;height:100%;display:grid;grid-template-columns:repeat(7,1fr);pointer-events:none;z-index:0}
+.cal-col-line{border-right:1px solid rgba(255,255,255,0.06)}
+.cal-col-line:first-child{border-left:none}
+.cal-col-line:last-child{border-right:none}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;position:relative;z-index:1}
 .dh{text-align:center;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;color:var(--t3);text-transform:uppercase;padding:0.5rem 0}
-.day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:400;border-radius:var(--rs);cursor:pointer;border:1px solid transparent;transition:var(--tr);color:var(--t1);background:none;position:relative;font-family:'Roboto',Arial,sans-serif;max-height:38px}
-.day:hover:not(.off):not(.emp):not(.sel){background:var(--or-bg);border-color:var(--or-bd);color:var(--or);z-index:1}
+.day{display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:400;border-radius:var(--rs);cursor:pointer;border:1px solid transparent;transition:var(--tr);color:var(--t1);background:none;position:relative;font-family:'Roboto',Arial,sans-serif;height:52px;width:100%}
+.day:hover:not(.off):not(.emp):not(.sel){color:var(--or);border-color:transparent}
+.day:hover:not(.off):not(.emp):not(.sel)::before{content:'';position:absolute;inset:8px;background:var(--or-bg);border:1px solid var(--or-bd);border-radius:var(--rs);z-index:-1}
 .day.off{color:var(--t3);cursor:not-allowed}
 .day.emp{cursor:default}
-.day.today{border-color:var(--or-bd);color:var(--or);font-weight:700}
-.day.sel{background:var(--or);border-color:var(--or);color:#fff;font-weight:700}
+.day.today{color:var(--or);font-weight:700}
+.day.today::before{content:'';position:absolute;inset:8px;border:1px solid var(--or-bd);border-radius:var(--rs);z-index:-1}
+.day.sel{color:#fff;font-weight:700}
+.day.sel::before{content:'';position:absolute;inset:8px;background:var(--or);border-radius:var(--rs);z-index:-1}
 .day.avail::after{content:'';display:block;width:3px;height:3px;border-radius:50%;background:var(--or);position:absolute;bottom:3px;left:50%;transform:translateX(-50%)}
 .day.sel::after{background:#fff}
-
-/* CALENDAR DIVIDERS — between columns only, not at edges */
-.cal-grid .dh:not(:last-child),.cal-grid .day:not(:nth-child(7n)){border-right:1px solid rgba(255,255,255,0.12)}
-.cal-grid .day.emp:not(:nth-child(7n)){border-right:1px solid rgba(255,255,255,0.12)}
 
 /* SLOTS */
 .slots-hdr{font-size:0.8rem;color:var(--t2);font-weight:500;margin-bottom:0.85rem}
@@ -171,12 +175,23 @@ body{font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--t1);
     </div>
 
     <div class="cal-wrap">
-    <div class="cal-nav">
-      <button class="cnb" id="prev-month" onclick="changeMonth(-1)">&#8249;</button>
-      <h2 id="month-label"></h2>
-      <button class="cnb" id="next-month" onclick="changeMonth(1)">&#8250;</button>
-    </div>
-    <div class="cal-grid" id="cal-grid"></div>
+      <div class="cal-nav">
+        <button class="cnb" id="prev-month" onclick="changeMonth(-1)">&#8249;</button>
+        <h2 id="month-label"></h2>
+        <button class="cnb" id="next-month" onclick="changeMonth(1)">&#8250;</button>
+      </div>
+      <div class="cal-grid-wrap">
+        <div class="cal-cols">
+          <div class="cal-col-line"></div>
+          <div class="cal-col-line"></div>
+          <div class="cal-col-line"></div>
+          <div class="cal-col-line"></div>
+          <div class="cal-col-line"></div>
+          <div class="cal-col-line"></div>
+          <div class="cal-col-line"></div>
+        </div>
+        <div class="cal-grid" id="cal-grid"></div>
+      </div>
     </div>
   </div>
 
