@@ -52,8 +52,9 @@ body{font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--t1);
 .cnb:hover:not(:disabled){border-color:var(--or);color:var(--or)}
 .cnb:disabled{opacity:0.28;cursor:not-allowed}
 .cal-wrap{max-width:800px;margin:0 auto}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:3px}
-.dh{text-align:center;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;color:var(--t3);text-transform:uppercase;padding:0.5rem 0}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-left:1px solid rgba(255,255,255,0.22);}
+.dh,.day,.day.emp{border-right:1px solid rgba(255,255,255,0.22)}
+.dh{text-align:center;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;color:var(--t3);text-transform:uppercase;padding:0.5rem 0;border-right:1px solid rgba(255,255,255,0.22)}
 .day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:400;border-radius:var(--rs);cursor:pointer;border:1px solid transparent;transition:var(--tr);color:var(--t1);background:none;position:relative;font-family:'Roboto',Arial,sans-serif;max-height:38px}
 .day:hover:not(.off):not(.emp):not(.sel){background:var(--or-bg);border-color:var(--or-bd);color:var(--or)}
 .day.off{color:var(--t3);cursor:not-allowed}
