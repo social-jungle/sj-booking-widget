@@ -52,17 +52,20 @@ body{font-family:'Roboto',Arial,sans-serif;background:var(--bg);color:var(--t1);
 .cnb:hover:not(:disabled){border-color:var(--or);color:var(--or)}
 .cnb:disabled{opacity:0.28;cursor:not-allowed}
 .cal-wrap{max-width:800px;margin:0 auto}
-.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0;border-left:1px solid rgba(255,255,255,0.22);}
-.dh,.day,.day.emp{border-right:1px solid rgba(255,255,255,0.22)}
-.dh{text-align:center;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;color:var(--t3);text-transform:uppercase;padding:0.5rem 0;border-right:1px solid rgba(255,255,255,0.22)}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:0}
+.dh{text-align:center;font-size:0.65rem;font-weight:700;letter-spacing:0.06em;color:var(--t3);text-transform:uppercase;padding:0.5rem 0}
 .day{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:400;border-radius:var(--rs);cursor:pointer;border:1px solid transparent;transition:var(--tr);color:var(--t1);background:none;position:relative;font-family:'Roboto',Arial,sans-serif;max-height:38px}
-.day:hover:not(.off):not(.emp):not(.sel){background:var(--or-bg);border-color:var(--or-bd);color:var(--or)}
+.day:hover:not(.off):not(.emp):not(.sel){background:var(--or-bg);border-color:var(--or-bd);color:var(--or);z-index:1}
 .day.off{color:var(--t3);cursor:not-allowed}
 .day.emp{cursor:default}
 .day.today{border-color:var(--or-bd);color:var(--or);font-weight:700}
 .day.sel{background:var(--or);border-color:var(--or);color:#fff;font-weight:700}
 .day.avail::after{content:'';display:block;width:3px;height:3px;border-radius:50%;background:var(--or);position:absolute;bottom:3px;left:50%;transform:translateX(-50%)}
 .day.sel::after{background:#fff}
+
+/* CALENDAR DIVIDERS — between columns only, not at edges */
+.cal-grid .dh:not(:last-child),.cal-grid .day:not(:nth-child(7n)){border-right:1px solid rgba(255,255,255,0.12)}
+.cal-grid .day.emp:not(:nth-child(7n)){border-right:1px solid rgba(255,255,255,0.12)}
 
 /* SLOTS */
 .slots-hdr{font-size:0.8rem;color:var(--t2);font-weight:500;margin-bottom:0.85rem}
